@@ -90,9 +90,9 @@ public class Dictionary_Project {
                     } catch (FileNotFoundException ex) {
                         Logger.getLogger(Dictionary_Project.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                    //off
-                    System.exit(0);
+                     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                }else{
+                     frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }
             }
         });
@@ -104,8 +104,8 @@ public class Dictionary_Project {
         // TODO code application logic here
         path = new File(Dictionary_Project.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile().getPath();
 
-        String srcA_V = "Anh_Viet.xml";
-        String srcV_A = "Viet_Anh.xml";
+        String srcA_V = "..\\Dictionary_Project\\src\\Anh_Viet.xml";
+        String srcV_A = "..\\Dictionary_Project\\src\\Viet_Anh.xml";
         javax.swing.SwingUtilities.invokeLater(() -> {
             try {
                 Dictionary_Project.createAndShowGUI();

@@ -25,7 +25,7 @@ public class History extends JPanel {
     public static JTable his_table;
 
     public JPanel History() throws FileNotFoundException {
-        CSVFile.readFile(history,path+"\\data\\history.txt");
+        CSVFile.readFile(history,path+"..\\data\\history.txt");
         String[] columnNames = {"Word", "Time"};
         
 

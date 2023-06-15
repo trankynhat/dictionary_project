@@ -29,11 +29,11 @@ public class Header extends JPanel {
         
         JPanel switch_panel = new JPanel();
         switch_panel.setLayout(new FlowLayout());
-        ImageIcon switch_img = new ImageIcon(path+"\\image\\switch.png");
+        ImageIcon switch_img = new ImageIcon("..\\Dictionary_Project\\src\\image\\switch.png");
         ImageIcon switch_resize = resizeImage(switch_img, 20, 20);
         JButton switch_button = new JButton(switch_resize);
 
-        ImageIcon switch_img_ = new ImageIcon(path+"\\image\\switch.png");
+        ImageIcon switch_img_ = new ImageIcon("..\\Dictionary_Project\\src\\image\\switch.png");
         ImageIcon switch_resize_ = resizeImage(switch_img_, 20, 20);
         JButton switch_button_ = new JButton(switch_resize_);
 
@@ -67,35 +67,29 @@ public class Header extends JPanel {
         add(eng_viet);
 
         //switch button
-        switch_button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!isVi_Eng) { // sử dụng toán tử ! để đảo ngược giá trị của biến isVi_Eng
-                    remove(eng_viet);
-                    add(viet_eng);
-                } else {
-                    remove(viet_eng);
-                    add(eng_viet);
-                }
-                revalidate(); // cập nhật lại giao diện của panel header
-                repaint();
-                isVi_Eng = !isVi_Eng;
+        switch_button.addActionListener((ActionEvent e) -> {
+            if (!isVi_Eng) { // sử dụng toán tử ! để đảo ngược giá trị của biến isVi_Eng
+                remove(eng_viet);
+                add(viet_eng);
+            } else {
+                remove(viet_eng);
+                add(eng_viet);
             }
+            revalidate(); // cập nhật lại giao diện của panel header
+            repaint();
+            isVi_Eng = !isVi_Eng;
         });
-        switch_button_.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!isVi_Eng) { // sử dụng toán tử ! để đảo ngược giá trị của biến isVi_Eng
-                    remove(eng_viet);
-                    add(viet_eng);
-                } else {
-                    remove(viet_eng);
-                    add(eng_viet);
-                }
-                revalidate(); // cập nhật lại giao diện của panel header
-                repaint();
-                isVi_Eng = !isVi_Eng;
+        switch_button_.addActionListener((ActionEvent e) -> {
+            if (!isVi_Eng) { // sử dụng toán tử ! để đảo ngược giá trị của biến isVi_Eng
+                remove(eng_viet);
+                add(viet_eng);
+            } else {
+                remove(viet_eng);
+                add(eng_viet);
             }
+            revalidate(); // cập nhật lại giao diện của panel header
+            repaint();
+            isVi_Eng = !isVi_Eng;
         });
 
         return this;

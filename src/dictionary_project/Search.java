@@ -8,12 +8,9 @@ import static dictionary_project.Dictionary_Project.Anh_Viet;
 import static dictionary_project.Dictionary_Project.Viet_Anh;
 import static dictionary_project.Dictionary_Project.isVi_Eng;
 import static dictionary_project.Dictionary_Project.resizeImage;
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.LocalDateTime;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -27,12 +24,13 @@ import javax.swing.JTextField;
  * @author Nhat
  */
 public class Search extends JPanel {
-
+    public Favorite favorite = new Favorite();
     public String input;
     boolean isFavor;
     public JButton _favor = new JButton();
-    ImageIcon _favor_icon = new ImageIcon(Dictionary_Project.path+"\\image\\heart_empty.png");
-    ImageIcon favor_icon = new ImageIcon(Dictionary_Project.path+"\\image\\heart.png");
+    public JTextArea output_txt;
+    ImageIcon _favor_icon = new ImageIcon("..\\Dictionary_Project\\src\\image\\heart_empty.png");
+    ImageIcon favor_icon = new ImageIcon("..\\Dictionary_Project\\src\\image\\heart.png");
 
     public JPanel Search() {
         isFavor = false;
@@ -40,11 +38,11 @@ public class Search extends JPanel {
         Font font_input = new Font("SansSerif", Font.PLAIN, 23);
 
         JTextField input_txt = new JTextField();//input data field
-        input_txt.setPreferredSize(new Dimension(356, 40));
+        input_txt.setPreferredSize(new Dimension(400, 40));
         input_txt.setFont(font_input);
         input_txt.setCaretPosition(0);
 
-        ImageIcon find_image = new ImageIcon(Dictionary_Project.path+"\\image\\find.png");
+        ImageIcon find_image = new ImageIcon("..\\Dictionary_Project\\src\\image\\find.png");
         find_image = resizeImage(find_image, 40, 40);
         JButton find_btn = new JButton();
         find_btn.setIcon(find_image);
@@ -54,7 +52,7 @@ public class Search extends JPanel {
         find_btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 
         Font font_output = new Font("SansSerif", Font.PLAIN, 15);
-        JTextArea output_txt = new JTextArea();//output data field
+        output_txt = new JTextArea();//output data field
         output_txt.setCaretPosition(output_txt.getDocument().getLength());
         output_txt.setLineWrap(true);
         output_txt.setWrapStyleWord(true); // thêm dòng này để đảm bảo từ không bị cắt đôi giữa hai dòng
@@ -87,7 +85,7 @@ public class Search extends JPanel {
         find_btn.addActionListener((e) -> {
             LocalDateTime currentTime = LocalDateTime.now();
             String input_ = input_txt.getText();
-            String meaning = "";
+            String meaning;
             if (isVi_Eng) {
                 meaning = Viet_Anh.get(input_);
                 if (meaning == null) {
@@ -102,7 +100,7 @@ public class Search extends JPanel {
                         _favor.setIcon(favor_icon);
                     }
                     History.history.put(currentTime.toString(), input_);
-                    Object[] temp = new Object[]{currentTime.toString(),input_};
+                    Object[] temp = new Object[]{currentTime.toString(), input_};
                     History.model.addRow(temp);
                 }
             } else {
@@ -118,16 +116,16 @@ public class Search extends JPanel {
                         _favor.setIcon(favor_icon);
                     }
                     History.history.put(currentTime.toString(), input_);
-                    Object[] temp = new Object[]{currentTime.toString(),input_};
+                    Object[] temp = new Object[]{currentTime.toString(), input_};
                     History.model.addRow(temp);
-                    
+                    favorite.updateTable();
                 }
             }
             input = input_;
             output_txt.setText(meaning);
 
         });
-
+        favorite.updateTable();
         return this;
     }
 

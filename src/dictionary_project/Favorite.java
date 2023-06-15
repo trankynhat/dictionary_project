@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Nhat
  */
 public class Favorite extends JPanel {
-
+    public Search search;
     String[] columnNames = {"Từ vựng", "Định nghĩa"};
     DefaultTableModel model = new DefaultTableModel(columnNames, 0);
     String favor_voc;
@@ -34,17 +34,15 @@ public class Favorite extends JPanel {
     public JPanel Favorite() throws FileNotFoundException {
         CSVFile.readFile(Eng_favor, path+"\\data\\anh_favor.txt");
         CSVFile.readFile(Viet_favor, path+"\\data\\viet_favor.txt");
-        
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        table.setPreferredScrollableViewportSize(new Dimension(465, 465));
         for(var key : Eng_favor.keySet()){
             model.addRow(new Object[]{key, Eng_favor.get(key)});
         }
         for(var key : Viet_favor.keySet()){
             model.addRow(new Object[]{key, Eng_favor.get(key)});
         }
-
-        table.setPreferredScrollableViewportSize(new Dimension(465, 465));
         JScrollPane scrollPane = new JScrollPane(table);
-
         // Thêm JScrollPane vào panel
         add(scrollPane, BorderLayout.CENTER);
         return this;
@@ -54,12 +52,12 @@ public class Favorite extends JPanel {
         if (isVi_Eng == false) {
             if (favor_voc != null) {
                 //this.Eng_favor.put(favor_voc, Anh_Viet.get(favor_voc));
-                this.Eng_favor.put(favor_voc, "");
+                Favorite.Eng_favor.put(favor_voc, Dictionary_Project.Anh_Viet.get(favor_voc));
 
             }
         } else {
             if (favor_voc != null) {
-                this.Viet_favor.put(favor_voc, "");
+                Favorite.Viet_favor.put(favor_voc, Dictionary_Project.Viet_Anh.get(favor_voc));
             }
         }
 
